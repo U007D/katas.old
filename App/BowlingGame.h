@@ -10,8 +10,10 @@
 class BowlingGame
 {
 public:
-    int Score(std::vector<int> rolls);
-};
+    int Score(const std::vector<int>& rolls) const;
 
+private:
+    int CalculateFrameScores(const std::vector<int>& rolls, int depth) const;
+};
 
 #endif //APP_BOWLINGGAME_H

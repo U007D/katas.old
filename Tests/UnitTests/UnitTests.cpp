@@ -8,12 +8,53 @@
 
 #include "BowlingGame.h"
 
-TEST(BowlingScore, all_gutter_balls_yields_0_score)
+TEST(BowlingScoreTests, all_gutter_balls_yield_0_score)
 {
     //Given
-    auto rolls = std::vector<int>(10);
-    ranges::fill(rolls, 0);
+    auto rolls = std::vector<int>{ranges::view::repeat_n(0, 20)};
     auto expectedScore = 0;
+    auto game = std::make_unique<BowlingGame>();
+
+    //When
+    auto result = game->Score(rolls);
+
+    //Then
+    EXPECT_EQ(result, expectedScore);
+}
+
+TEST(BowlingScoreTests, all_1_balls_yield_20_score)
+{
+    //Given
+    auto rolls = std::vector<int>{ranges::view::repeat_n(1, 20)};
+    auto expectedScore = 20;
+    auto game = std::make_unique<BowlingGame>();
+
+    //When
+    auto result = game->Score(rolls);
+
+    //Then
+    EXPECT_EQ(result, expectedScore);
+}
+
+TEST(BowlingScoreTests, all_5_balls_yield_150_score)
+{
+    //Given
+    auto rolls = std::vector<int>{ranges::view::repeat_n(5, 21)};
+    auto expectedScore = 150;
+    auto game = std::make_unique<BowlingGame>();
+
+    //When
+    auto result = game->Score(rolls);
+
+    //Then
+    EXPECT_EQ(result, expectedScore);
+}
+
+TEST(BowlingScoreTests, all_10_balls_yield_300_score)
+{
+    //Given
+    auto rolls = std::vector<int>{ranges::view::repeat_n(10, 12)};
+    auto expectedScore = 300;
     auto game = std::make_unique<BowlingGame>();
 
     //When
