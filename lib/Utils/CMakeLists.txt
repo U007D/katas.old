@@ -1,0 +1,1 @@
+add_library(Utils Exceptions.cpp Exceptions.h)

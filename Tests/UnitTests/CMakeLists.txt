@@ -1,6 +1,6 @@
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-add_executable(runTests ValidateTestFramework.cpp)
+add_executable(runTests ValidateTestFramework.cpp UnitTests.cpp)
 
 target_link_libraries(runTests gtest gtest_main)
-target_link_libraries(runTests App)
+target_link_libraries(runTests App Utils)

@@ -1,4 +1,5 @@
 *.iws
 **/.idea/workspace.xml
 **/.idea/tasks.xml 
-**/googletest/
+**/lib/googletest/
+**/lib/range-v3/

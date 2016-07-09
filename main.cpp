@@ -1,9 +1,9 @@
 #include <iostream>
-#include "HelloWorld.h"
 
 using namespace std;
 
 int main()
 {
-    auto world = std::make_unique<HelloWorld>();
+    std::cout << sizeof(size_t) * CHAR_BIT << "-bit app is running." << std::endl;
+    return EXIT_SUCCESS;
 }
