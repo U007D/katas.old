@@ -1,0 +1,15 @@
+#include <cstdint>
+#include <iostream>
+
+#define CATCH_CONFIG_RUNNER
+#include "catch.hpp"
+
+auto main(const int32_t argc, const char* const argv[])
+{
+	auto returnCode = Catch::Session().run(argc, argv);
+
+	std::cout << "\nPress any key to exit..." << std::endl;
+	static_cast<void>(std::getchar());
+
+	return returnCode;
+}
