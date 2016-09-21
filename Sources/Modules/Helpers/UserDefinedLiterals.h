@@ -18,7 +18,8 @@ struct LiteralParser<sum>
 template<unsigned long long sum, char first, char... rest>
 struct LiteralParser<sum, first, rest...>
 {
-    static_assert(first >= '0' && first <= '9', "invalid input: expecting only numeric digits from 0-9");
+    //TODO: Add support for parsing floating point values
+    static_assert((first >= '0' && first <= '9'), "invalid input: expecting only numeric digits from 0-9");
     static const unsigned long long value = LiteralParser<sum * 10 + static_cast<unsigned long long>(first - '0'), rest...>::value;
 };
 
@@ -37,5 +38,7 @@ template<char... chars> constexpr u64 operator ""_u64() { return {LiteralParser<
 //Add literals for ptrdiff_t and size_t
 template<char... chars> constexpr isz operator ""_isz() { return {LiteralParser<0, chars...>::value}; }
 template<char... chars> constexpr usz operator ""_usz() { return {LiteralParser<0, chars...>::value}; }
+
+//TODO: Add float & double support
 
 #endif //USER_DEFINED_LITERALS_H
