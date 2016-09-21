@@ -5,57 +5,37 @@
 
 #include "AbbreviatedTypes.h"
 
+//Support for forcing user-defined literals to be evaluated at compile-time
+template<unsigned long long sum, char... rest>
+struct LiteralParser;
+
+template<unsigned long long sum>
+struct LiteralParser<sum>
+{
+    static const unsigned long long value = sum;
+};
+
+template<unsigned long long sum, char first, char... rest>
+struct LiteralParser<sum, first, rest...>
+{
+    static_assert(first >= '0' && first <= '9', "invalid input: expecting only numeric digits from 0-9");
+    static const unsigned long long value = LiteralParser<sum * 10 + static_cast<unsigned long long>(first - '0'), rest...>::value;
+};
+
 //Add common fixed-width signed value literals
-constexpr i8 operator ""_i8(unsigned long long v)
-{
-	return static_cast<long long>(v) < INT8_MIN || v > INT8_MAX ? throw std::overflow_error("int8_t overflow") : static_cast<i8>(v);
-}
-
-constexpr i16 operator ""_i16(unsigned long long v)
-{
-	return static_cast<long long>(v) < INT16_MIN || v > INT16_MAX ? throw std::overflow_error("int16_t overflow") : static_cast<i16>(v);
-}
-
-constexpr i32 operator ""_i32(unsigned long long v)
-{
-	return static_cast<long long>(v) < INT32_MIN || v > INT32_MAX ? throw std::overflow_error("int32_t overflow") : static_cast<i32>(v);
-}
-
-constexpr i64 operator ""_i64(unsigned long long v)
-{
-	return static_cast<long long>(v) < INT64_MIN || v > INT64_MAX ? throw std::overflow_error("int64_t overflow") : static_cast<i64>(v);
-}
+template<char... chars> constexpr i8 operator ""_i8() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr i16 operator ""_i16() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr i32 operator ""_i32() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr i64 operator ""_i64() { return {LiteralParser<0, chars...>::value}; }
 
 //Add common fixed-width unsigned value literals
-constexpr u8 operator "" _u8(unsigned long long v)
-{
-	return v > UINT8_MAX ? throw std::overflow_error("uint8_t overflow") : static_cast<u8>(v);
-}
-
-constexpr u16 operator ""_u16(unsigned long long v)
-{
-	return v > UINT16_MAX ? throw std::overflow_error("uint16_t overflow") : static_cast<u16>(v);
-}
-
-constexpr u32 operator ""_u32(unsigned long long v)
-{
-	return v > UINT32_MAX ? throw std::overflow_error("uint32_t overflow") : static_cast<u32>(v);
-}
-
-constexpr u64 operator ""_u64(unsigned long long v)
-{
-	return v > UINT64_MAX ? throw std::overflow_error("uint64_t overflow") : static_cast<u64>(v);
-}
+template<char... chars> constexpr u8 operator "" _u8() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr u16 operator ""_u16() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr u32 operator ""_u32() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr u64 operator ""_u64() { return {LiteralParser<0, chars...>::value}; }
 
 //Add literals for ptrdiff_t and size_t
-constexpr isz operator ""_isz(unsigned long long v)
-{
-	return static_cast<long long>(v) < PTRDIFF_MIN || v > PTRDIFF_MAX ? throw std::overflow_error("ptrdiff_t overflow") : static_cast<isz>(v);
-}
-
-constexpr usz operator ""_usz(unsigned long long v)
-{
-	return v > SIZE_MAX ? throw std::overflow_error("size_t overflow") : static_cast<usz>(v);
-}
+template<char... chars> constexpr isz operator ""_isz() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr usz operator ""_usz() { return {LiteralParser<0, chars...>::value}; }
 
 #endif //BG_UTILS_H
