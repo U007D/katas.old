@@ -1,5 +1,5 @@
-#ifndef BG_UTILS_H
-#define BG_UTILS_H
+#ifndef USER_DEFINED_LITERALS_H
+#define USER_DEFINED_LITERALS_H
 
 #include <cstdint>
 
@@ -38,4 +38,4 @@ template<char... chars> constexpr u64 operator ""_u64() { return {LiteralParser<
 template<char... chars> constexpr isz operator ""_isz() { return {LiteralParser<0, chars...>::value}; }
 template<char... chars> constexpr usz operator ""_usz() { return {LiteralParser<0, chars...>::value}; }
 
-#endif //BG_UTILS_H
+#endif //USER_DEFINED_LITERALS_H
