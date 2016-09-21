@@ -8,8 +8,8 @@ int main(const int32_t argc, const char* const argv[])
 {
 	auto returnCode = Catch::Session().run(argc, argv);
 
-	std::cout << "\nPress any key to exit..." << std::endl;
-	static_cast<void>(std::getchar());
+//	std::cout << "\nPress any key to exit..." << std::endl;
+//	static_cast<void>(std::getchar());
 
 	return returnCode;
 }
