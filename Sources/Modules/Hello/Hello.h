@@ -10,7 +10,7 @@ class Hello
 public:
 	/// Returns a "Hello, world"-style greeting to the caller
 	std::string Greet() const;
-}
+};
 
 /// \example ../Tests/Unit/Untitled\ Project/Hello.cpp
 /// This is an example of how to use the Hello class.

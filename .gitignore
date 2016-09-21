@@ -513,8 +513,7 @@ paket-files/
 .fake/
 
 # JetBrains Rider
-**/.idea/workspace.xml
-**/.idea/tasks.xml
+.idea
 *.iws
 *.sln.iml
 

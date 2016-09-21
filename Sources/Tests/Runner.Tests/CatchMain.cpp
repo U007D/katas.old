@@ -4,7 +4,7 @@
 #define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
 
-auto main(const int32_t argc, const char* const argv[])
+int main(const int32_t argc, const char* const argv[])
 {
 	auto returnCode = Catch::Session().run(argc, argv);
 

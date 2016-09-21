@@ -1,6 +1,4 @@
-set(SOURCE_FILES main.cpp Fit.cpp Fit.h)
-add_executable(Fit ${SOURCE_FILES})
+set(SOURCE_FILES Hello.cpp Hello.h)
+add_library(HelloLib ${SOURCE_FILES})
 
-include_directories(Fit ../Helpers)
-
-target_link_libraries(Fit Fit)
+target_include_directories(HelloLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../)
