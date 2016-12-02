@@ -2,9 +2,16 @@
 #include "BowlingGame.h"
 #include "Helpers/Exceptions.h"
 
-u32 BowlingGame::Score() const
+xstd::optional<u32> BowlingGame::Score() const
 {
-	return score_;
+	if (IsInOpenFrame())
+    {
+        return xstd::nullopt;
+    }
+    else
+    {
+        return score_;
+    }
 }
 
 u32 BowlingGame::Frame() const
@@ -19,14 +26,23 @@ u32 BowlingGame::Ball() const
 
 BowlingGame BowlingGame::Roll(u32 pins)
 {
-    if( pins > MAX_PINS_PER_ROLL ) { throw OutOfRangeException(); }
+    if( pins > MAX_PINS_PER_ROLL || pins > maxPinsRemaining_ ) { throw OutOfRangeException(); }
 
-    if( ++ball_ > FrameLength(frame_))
+    score_ += pins;
+    maxPinsRemaining_ -= pins;
+
+    if( !maxPinsRemaining_ )
+    {
+        ++openFrameCount_;
+    }
+
+    if( ++ball_ > FrameLength(frame_) || maxPinsRemaining_ == 0)
     {
         ball_ = 1;
         ++frame_;
+        maxPinsRemaining_ = MAX_SCORE_PER_FRAME;
     }
-    score_ += pins;
+
     return *this;
 }
 
@@ -34,4 +50,9 @@ u32 BowlingGame::FrameLength(u32 frameNo) const
 {
     if( frameNo < 1 || frameNo > NUM_FRAMES_PER_GAME ) { throw OutOfRangeException(); }
     return frameNo == 10 ? 3 : 2;
+}
+
+bool BowlingGame::IsInOpenFrame() const
+{
+    return openFrameCount_ == 0 ? true : false;
 }
