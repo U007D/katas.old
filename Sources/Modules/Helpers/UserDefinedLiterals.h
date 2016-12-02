@@ -30,7 +30,7 @@ template<char... chars> constexpr i32 operator ""_i32() { return {LiteralParser<
 template<char... chars> constexpr i64 operator ""_i64() { return {LiteralParser<0, chars...>::value}; }
 
 //Add common fixed-width unsigned value literals
-template<char... chars> constexpr u8 operator "" _u8() { return {LiteralParser<0, chars...>::value}; }
+template<char... chars> constexpr u8 operator ""_u8() { return {LiteralParser<0, chars...>::value}; }
 template<char... chars> constexpr u16 operator ""_u16() { return {LiteralParser<0, chars...>::value}; }
 template<char... chars> constexpr u32 operator ""_u32() { return {LiteralParser<0, chars...>::value}; }
 template<char... chars> constexpr u64 operator ""_u64() { return {LiteralParser<0, chars...>::value}; }

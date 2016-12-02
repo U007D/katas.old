@@ -145,6 +145,7 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 CTestTestfile.cmake
+**/cmake-build-debug
 
 ###cmake -G "Visual Studio 14 2015 Win64" ###
 **/*.vcxproj

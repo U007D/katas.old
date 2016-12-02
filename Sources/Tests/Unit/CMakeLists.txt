@@ -1,1 +1,1 @@
-set(UNIT_TEST_SOURCE_FILES Unit/Sample.UnitTests.cpp Unit/Hello.UnitTests.cpp PARENT_SCOPE)
+set(UNIT_TEST_SOURCE_FILES Unit/BowlingGame.UnitTests.cpp PARENT_SCOPE)
