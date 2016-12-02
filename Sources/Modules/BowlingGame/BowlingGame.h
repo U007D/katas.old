@@ -8,19 +8,21 @@ class BowlingGame
 {
 public:
 	/// Returns the current game score
-	u16 Score() const;
+	u32 Score() const;
 
     /// Returns the current game frame
-    u8 CurrentFrame() const;
+    u32 CurrentFrame() const;
 
     /// Returns the current frame ball
-    u8 CurrentBall() const;
+    u32 CurrentBall() const;
 
     /// Report a score as a result of a roll
-    BowlingGame Roll(u8 rollScore);
+    BowlingGame Roll(u32 pins);
 
 private:
-    u8 currentBall_ = 1;
+    static constexpr u32 MAX_PINS_PER_ROLL = 10;
+    u32 score_ = 0;
+    u32 ball_ = 1;
 };
 
 /// \example ../Tests/Unit/BowlingGame.UnitTests.cpp

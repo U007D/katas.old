@@ -44,5 +44,15 @@ SCENARIO("BowlingGame unit tests")
 				REQUIRE(game.CurrentBall() == 2);
 			}
 		}
+
+		WHEN("a 7 is rolled as an arbitrary open frame value")
+		{
+			game.Roll(7);
+
+			THEN("the score is 7")
+			{
+				REQUIRE(game.Score() == 7);
+			}
+		}
 	}
 }

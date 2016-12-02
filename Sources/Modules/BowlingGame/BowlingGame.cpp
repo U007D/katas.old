@@ -1,23 +1,26 @@
+#include <cassert>
 #include "BowlingGame.h"
+#include "Helpers/Exceptions.h"
 
-u16 BowlingGame::Score() const
+u32 BowlingGame::Score() const
 {
-	return 0;
+	return score_;
 }
 
-u8 BowlingGame::CurrentFrame() const
+u32 BowlingGame::CurrentFrame() const
 {
     return 1;
 }
 
-u8 BowlingGame::CurrentBall() const
+u32 BowlingGame::CurrentBall() const
 {
-    return currentBall_;
+    return ball_;
 }
 
-BowlingGame BowlingGame::Roll(u8 rollScore)
+BowlingGame BowlingGame::Roll(u32 pins)
 {
-    (void)rollScore;
-    ++currentBall_;
+    if( pins > MAX_PINS_PER_ROLL ) { throw OutOfRangeException(); }
+    ++ball_;
+    score_ += pins;
     return *this;
 }
