@@ -11,17 +11,21 @@ public:
 	u32 Score() const;
 
     /// Returns the current game frame
-    u32 CurrentFrame() const;
+    u32 Frame() const;
 
     /// Returns the current frame ball
-    u32 CurrentBall() const;
+    u32 Ball() const;
 
     /// Report a score as a result of a roll
     BowlingGame Roll(u32 pins);
 
 private:
+    u32 FrameLength(u32 frameNo) const;
+
     static constexpr u32 MAX_PINS_PER_ROLL = 10;
+    static constexpr u32 NUM_FRAMES_PER_GAME = 10;
     u32 score_ = 0;
+    u32 frame_ = 1;
     u32 ball_ = 1;
 };
 
