@@ -12,5 +12,12 @@ u8 BowlingGame::CurrentFrame() const
 
 u8 BowlingGame::CurrentBall() const
 {
-    return 1;
+    return currentBall_;
+}
+
+BowlingGame BowlingGame::Roll(u8 rollScore)
+{
+    (void)rollScore;
+    ++currentBall_;
+    return *this;
 }

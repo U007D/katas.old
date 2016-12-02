@@ -15,6 +15,12 @@ public:
 
     /// Returns the current frame ball
     u8 CurrentBall() const;
+
+    /// Report a score as a result of a roll
+    BowlingGame Roll(u8 rollScore);
+
+private:
+    u8 currentBall_ = 1;
 };
 
 /// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
