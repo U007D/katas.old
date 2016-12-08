@@ -1,39 +1,44 @@
 #include <numeric>
+#include <iostream>
 #include "BowlingGame.h"
 
 BowlingGame::BowlingGame(const std::vector<u8>& rolls)
 {
-    score_ = std::accumulate(std::begin(rolls), std::end(rolls), 0_u32, [&](u32 score, u8 roll){
-        static u8 frame = 1;    //this lambda is not thread-safe
-        static u8 ball = 1;
-        static u8 nextRollBonus = 0;
-        static u8 nextNextRollBonus = 0;
-        static u8 frameScore = 0;
+    frame = 1;
+    ball = 1;
+    nextRollBonus = 0;
+    nextNextRollBonus = 0;
+    frameScore = 0;
+    calls = 0;
+
+    score_ = std::accumulate(std::begin(rolls), std::end(rolls), 0_u32, [ ](u32 score, u8 roll) {
+
+        std::cout << "Call: " << static_cast<u32>(++calls) << std::endl;
 
         score = score + roll * (nextRollBonus + 1);
+        frameScore += roll;
+        if(frame > 10)
+        {
+//            std::cout << "Frame: " << static_cast<u32>(frame) << std::endl;
+            score -= roll;
+        }
         nextRollBonus = nextNextRollBonus;
         nextNextRollBonus = 0;
 
-        frameScore += roll;
-        if(frameScore == 10)
-        {
+        if (frameScore == 10) {
             ++nextRollBonus;
             frameScore = 0;
-            if(ball == 1)
-            {
+            if (ball == 1) {
                 ++nextNextRollBonus;
                 ++frame;
-            }
-            else
-            {
+            } else {
                 ++frame;
                 --ball;
             }
         }
         else
         {
-            if(ball == 2)
-            {
+            if (ball == 2) {
                 --ball;
                 ++frame;
                 frameScore = 0;
@@ -44,7 +49,6 @@ BowlingGame::BowlingGame(const std::vector<u8>& rolls)
             }
         }
         return score;
-
     });
 }
 

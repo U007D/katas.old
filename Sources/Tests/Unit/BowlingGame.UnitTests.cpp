@@ -43,4 +43,14 @@ SCENARIO("BowlingGame unit tests")
             REQUIRE(game.Score() == 24);
         }
     }
+
+    GIVEN("a perfect game")
+    {
+        auto game = BowlingGame({10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10});
+
+        THEN("the score should be 300")
+        {
+            REQUIRE(game.Score() == 300);
+        }
+    }
 }
