@@ -15,7 +15,7 @@ public:
     Score CalculateScore(const Rolls &rolls) const;
 
 private:
-    std::tuple<Score, Roll, Roll> CalculateScore(Rolls::const_iterator beg, Rolls::const_iterator end, u8 frameNo) const;
+    std::tuple<Score, Roll, Roll> CalculateScore(Rolls::const_iterator beg, Rolls::const_iterator end, u32 frameNo) const;
 };
 
 /// \example ../Tests/Unit/BowlingGame.UnitTests.cpp

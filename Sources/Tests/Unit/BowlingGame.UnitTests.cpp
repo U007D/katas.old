@@ -8,7 +8,7 @@ SCENARIO("BowlingGame unit tests")
     {
         auto game = BowlingGame();
 
-        WHEN("a game of all gutter-balls is rolled")
+        WHEN("a game of all gutterballs is rolled")
         {
             auto score = game.CalculateScore({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
 
@@ -28,13 +28,23 @@ SCENARIO("BowlingGame unit tests")
             }
         }
 
-        AND_WHEN("a game starting with a spare, followed by a 3-roll and gutterballs for the rest")
+        AND_WHEN("a game starting with a spare, followed by a 3-roll with gutterballs for the rest")
         {
             auto score = game.CalculateScore({0, 10, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
 
             THEN("the score should be 16")
             {
                 REQUIRE(score == 16);
+            }
+        }
+
+        AND_WHEN("a game starts with a strike, followed by a 3- and 4-roll with gutterballs for the rest")
+        {
+            auto score = game.CalculateScore({10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+
+            THEN("the score should be 24")
+            {
+                REQUIRE(score == 24);
             }
         }
     }
