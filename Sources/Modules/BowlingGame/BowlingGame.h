@@ -2,14 +2,17 @@
 #define BOWLING_GAME_H
 
 #include <vector>
-#include "Helpers/AbbreviatedTypes.h"
+#include "Helpers/UserDefinedTypes.h"
 
 /// BowlingGame class contains all information about 1 game (10 frames) of bowling
 class BowlingGame
 {
 public:
-    BowlingGame(const std::vector<u8>& rolls) {(void)rolls;}
+    BowlingGame(const std::vector<u8>& rolls);
     u32 Score();
+
+private:
+    u32 score_ = 0;
 };
 
 /// \example ../Tests/Unit/BowlingGame.UnitTests.cpp

@@ -1,9 +1,24 @@
-#ifndef USER_DEFINED_LITERALS_H
-#define USER_DEFINED_LITERALS_H
+#ifndef USER_DEFINED_TYPES_H
+#define USER_DEFINED_TYPES_H
 
 #include <cstdint>
 
-#include "AbbreviatedTypes.h"
+//Abbreviated numeric types
+using i8 = int8_t;
+using i16 = int16_t;
+using i32 = int32_t;
+using i64 = int64_t;
+using isz = ptrdiff_t;
+
+using u8 = uint8_t;
+using u16 = uint16_t;
+using u32 = uint32_t;
+using u64 = uint64_t;
+using usz = size_t;
+
+using f32 = float;
+using f64 = double;
+using f80 = long double;
 
 //Support for forcing user-defined literals to be evaluated at compile-time
 template<unsigned long long sum, char... rest>
@@ -41,4 +56,4 @@ template<char... chars> constexpr usz operator ""_usz() { return {LiteralParser<
 
 //TODO: Add float & double support
 
-#endif //USER_DEFINED_LITERALS_H
+#endif //USER_DEFINED_TYPES_H
