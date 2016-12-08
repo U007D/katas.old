@@ -23,4 +23,13 @@ SCENARIO("BowlingGame unit tests")
             REQUIRE(game.Score() == 20);
         }
     }
+    GIVEN("a game consisting of a spare in frame 1, followed by a roll of 3, followed by all gutter balls")
+    {
+        auto game = BowlingGame({0, 10, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+
+        THEN("the score should be 16")
+        {
+            REQUIRE(game.Score() == 16);
+        }
+    }
 }
