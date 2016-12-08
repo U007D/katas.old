@@ -4,11 +4,18 @@
 #include <vector>
 #include "Helpers/UserDefinedTypes.h"
 
+using Roll = u8;
+using Score = u32;
+using Rolls = std::vector<Roll>;
+
 /// BowlingGame class contains all information about 1 game (10 frames) of bowling
 class BowlingGame
 {
 public:
-    u32 Score(const std::vector<u8>& rolls);
+    Score CalculateScore(const Rolls &rolls) const;
+
+private:
+    std::tuple<Score, Roll, Roll> CalculateScore(Rolls::const_iterator beg, Rolls::const_iterator end, u8 frameNo) const;
 };
 
 /// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
