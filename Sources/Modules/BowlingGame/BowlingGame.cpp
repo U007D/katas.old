@@ -19,5 +19,5 @@ std::tuple<Score, Roll, Roll> BowlingGame::CalculateScore(Rolls::const_iterator 
     {
         bonus = std::get<1>(restOfScore);
     }
-    return std::make_tuple(*beg + (*beg == 10 ? 0 : *(beg + 1)) + std::get<0>(restOfScore) + bonus, *beg, *(beg + 1));
+    return std::make_tuple(frameNo <= 10 ? *beg + (*beg == 10 ? 0 : *(beg + 1)) + std::get<0>(restOfScore) + bonus : 0, *beg, *(beg + 1));
 }

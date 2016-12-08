@@ -47,5 +47,16 @@ SCENARIO("BowlingGame unit tests")
                 REQUIRE(score == 24);
             }
         }
+
+        AND_WHEN("a perfect game is rolled")
+        {
+            auto score = game.CalculateScore({10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10});
+            {
+                THEN("the score should be 300")
+                {
+                    REQUIRE(score == 300);
+                }
+            }
+        }
     }
 }
