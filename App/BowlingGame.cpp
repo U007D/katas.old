@@ -18,7 +18,7 @@ int BowlingGame::CalculateFrameScores(const std::vector<int>& rolls, int depth) 
     }
 
     assert(rolls.size() <=
-           std::numeric_limits<size_t>::max() >> 1); //Ranges uses signed parameters, so ensure no overflow
+           std::numeric_limits<size_t>::max() >> 1); //ranges:: uses signed parameters, so ensure no overflow
 
     auto nextFrameStartIndex = 2;   //Frame nominally composed of two rolls
     auto markThisFrame = false;
@@ -48,5 +48,5 @@ int BowlingGame::CalculateFrameScores(const std::vector<int>& rolls, int depth) 
                         return value;
                     }
             ), 0) + CalculateFrameScores(rolls | ranges::view::slice(nextFrameStartIndex, static_cast<int>(rolls.size())),
-                                ++depth);
+                                ++depth);   //assert(rolls.size() <= std::numeric_limits<size_t>::max() >> 1) ensures no overflow
 }
