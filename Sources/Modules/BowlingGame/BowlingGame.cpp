@@ -2,36 +2,45 @@
 #include <tuple>
 #include "BowlingGame.h"
 
-u32 BowlingGame::CalculateScore(const Rolls &rolls) const {
-    return std::get<0>(CalculateScore(std::begin(rolls), std::end(rolls), 1_u8));
+u32 BowlingGame::CalculateScore(const Rolls& rolls) const
+{
+    return CalculateRemainingScore(std::begin(rolls), std::end(rolls), 1);
 }
 
-std::tuple<Score, Roll, Roll> BowlingGame::CalculateScore(Rolls::const_iterator beg, Rolls::const_iterator end,
-                                                          u32 frameNo) const {
-    if(beg == end) { return std::make_tuple(0, 0, 0); }
+u32 BowlingGame::CalculateRemainingScore(const Rolls::const_iterator& currRoll,
+                                         const Rolls::const_iterator& endOfRolls,
+                                         u32 frameNo) const
+{
+    if (frameNo > 10) { return 0; }
 
-    auto restOfScore = CalculateScore(beg + RollsThisFrame(beg, frameNo), end, frameNo + 1);
+    auto score = std::accumulate(currRoll, std::next(currRoll, RollsThisFrame(currRoll)), 0_u32);
+    auto bonus = IsClosedFrame(currRoll)
+                 ? *(std::next(currRoll, RollsThisFrame(currRoll))) +
+                    (IsStrikeFrame(currRoll) ? *(std::next(currRoll, RollsThisFrame(currRoll) + 1)) : 0)
+                 : 0;
 
-    auto bonusThisFrame = 0_u32;
-    if( IsStrikeFrame(beg, frameNo) )
-    {
-        bonusThisFrame = std::get<1>(restOfScore) + std::get<2>(restOfScore);
-    }
-    else if(IsSpareFrame(beg, frameNo))
-    {
-        bonusThisFrame = std::get<1>(restOfScore);
-    }
-    return std::make_tuple(frameNo <= 10 ? *beg + (IsStrikeFrame(beg, frameNo) ? 0 : *(beg + 1)) + std::get<0>(restOfScore) + bonusThisFrame : 0, *beg, *(beg + 1));
+
+    return score + bonus +
+           CalculateRemainingScore(std::next(currRoll, RollsThisFrame(currRoll)), endOfRolls, frameNo + 1);
 }
 
-u32 BowlingGame::RollsThisFrame(const Rolls::const_iterator &beg, const u32 frameNo) const {
-    return IsStrikeFrame(beg, frameNo) ? (frameNo == 10 ? 3 : 1) : 2;
+u32 BowlingGame::RollsThisFrame(const Rolls::const_iterator& currRoll) const
+{
+    return IsStrikeFrame(currRoll) ? 1 : 2;
 }
 
-bool BowlingGame::IsStrikeFrame(const Rolls::const_iterator &beg, const u32 frameNo) const {
-    return *beg == 10 && frameNo <= 10 ? true : false;
+bool BowlingGame::IsStrikeFrame(const Rolls::const_iterator& currRoll) const
+{
+    return *currRoll == 10;
 }
 
-bool BowlingGame::IsSpareFrame(const Rolls::const_iterator &beg, u32 frameNo) const {
-    return frameNo <= 10 && !IsStrikeFrame(beg, frameNo) ? *beg + *(beg + 1) == 10 : false;
+bool BowlingGame::IsSpareFrame(const Rolls::const_iterator& currRoll) const
+{
+    return !IsStrikeFrame(currRoll) && *currRoll + *(std::next(currRoll, 1)) == 10;
 }
+
+bool BowlingGame::IsClosedFrame(const Rolls::const_iterator& currRoll) const
+{
+    return IsStrikeFrame(currRoll) || IsSpareFrame(currRoll);
+}
+

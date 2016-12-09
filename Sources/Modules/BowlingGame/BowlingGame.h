@@ -4,25 +4,31 @@
 #include <vector>
 #include "Helpers/UserDefinedTypes.h"
 
-using Roll = u8;
-using Score = u32;
+using Roll = u32;
 using Rolls = std::vector<Roll>;
 
 /// BowlingGame class contains all information about 1 game (10 frames) of bowling
 class BowlingGame
 {
 public:
-    Score CalculateScore(const Rolls &rolls) const;
+    u32 CalculateScore(const Rolls& rolls) const;
 
 private:
-    std::tuple<Score, Roll, Roll> CalculateScore(Rolls::const_iterator beg, Rolls::const_iterator end, u32 frameNo) const;
-    u32 RollsThisFrame(const Rolls::const_iterator &beg, const u32 frameNo) const;
+    u32 CalculateRemainingScore(const Rolls::const_iterator& currRoll,
+                                const Rolls::const_iterator& endOfRolls,
+                                u32 frameNo) const;
+    u32 RollsThisFrame(const Rolls::const_iterator& currRoll) const;
 
-    bool IsStrikeFrame(const Rolls::const_iterator &beg, const u32 frameNo) const;
+    bool IsStrikeFrame(const Rolls::const_iterator& currRoll) const;
+    bool IsSpareFrame(const Rolls::const_iterator& currRoll) const;
+    bool IsClosedFrame(const Rolls::const_iterator& currRoll) const;
 
-    bool IsSpareFrame(const Rolls::const_iterator &beg, u32 frameNo) const;
 };
 
+/// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
+/// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
+/// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
+/// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
 /// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
 /// This is an example of how to use the BowlingGame class.
 
