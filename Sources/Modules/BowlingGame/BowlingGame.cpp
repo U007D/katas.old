@@ -15,10 +15,10 @@ u32 BowlingGame::CalculateRemainingScore(const Rolls::const_iterator& currRoll,
 
     auto score = std::accumulate(currRoll, std::next(currRoll, RollsThisFrame(currRoll)), 0_u32);
     auto bonus = IsClosedFrame(currRoll)
-                 ? *(std::next(currRoll, RollsThisFrame(currRoll))) +
-                    (IsStrikeFrame(currRoll) ? *(std::next(currRoll, RollsThisFrame(currRoll) + 1)) : 0)
+                 ? *(std::next(currRoll, RollsThisFrame(currRoll))) + (IsStrikeFrame(currRoll)
+                          ? *(std::next(currRoll, RollsThisFrame(currRoll) + 1))
+                          : 0)
                  : 0;
-
 
     return score + bonus +
            CalculateRemainingScore(std::next(currRoll, RollsThisFrame(currRoll)), endOfRolls, frameNo + 1);
