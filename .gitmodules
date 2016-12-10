@@ -4,3 +4,6 @@
 [submodule "Sources/Modules/3rdParty/cpp17_headers"]
 	path = Sources/Modules/3rdParty/cpp17_headers
 	url = git@github.com:tcbrindle/cpp17_headers.git
+[submodule "Sources/Modules/3rdParty/range"]
+	path = Sources/Modules/3rdParty/range
+	url = git@github.com:ericniebler/range-v3.git
