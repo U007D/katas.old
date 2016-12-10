@@ -17,5 +17,15 @@ SCENARIO("BowlingGame unit tests")
                 REQUIRE(game.Score() == 0);
             }
         }
+
+        WHEN("a game of all one balls is rolled")
+        {
+            game.Roll({1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+
+            THEN("the score should be 20")
+            {
+                REQUIRE(game.Score() == 20);
+            }
+        }
     }
 }

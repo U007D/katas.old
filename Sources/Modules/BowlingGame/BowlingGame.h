@@ -13,10 +13,11 @@ namespace xstd = std::experimental;
 class BowlingGame
 {
 public:
-    BowlingGame Roll(const std::vector<u32>& rolls) const;
+    BowlingGame Roll(const std::vector<u32>& rolls);
     u32 Score() const;
 
 private:
+    u32 score_ = 0;
     struct Frame
     {
         struct OpenFrame { std::array<u32, 2> rolls; };
