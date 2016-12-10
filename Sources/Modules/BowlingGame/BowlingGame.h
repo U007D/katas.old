@@ -13,7 +13,8 @@ namespace xstd = std::experimental;
 class BowlingGame
 {
 public:
-    u32 CalculateScore(const std::vector<u32>& rolls) const;
+    BowlingGame Roll(const std::vector<u32>& rolls) const;
+    u32 Score() const;
 
 private:
     struct Frame
@@ -27,16 +28,6 @@ private:
 
         xstd::variant<OpenFrame, StrikeFrame, SpareFrame, StrikeFinalFrame, SpareFinalFrame> frame_t;
     };
-
-    u32 CalculateRemainingScore(const std::vector<u32>::const_iterator& currRoll,
-                                const std::vector<u32>::const_iterator& endOfRolls,
-                                u32 frameNo) const;
-    u32 RollsThisFrame(const std::vector<u32>::const_iterator& currRoll) const;
-
-    bool IsStrikeFrame(const std::vector<u32>::const_iterator& currRoll) const;
-    bool IsSpareFrame(const std::vector<u32>::const_iterator& currRoll) const;
-    bool IsClosedFrame(const std::vector<u32>::const_iterator& currRoll) const;
-
 };
 
 /// \example ../Tests/Unit/BowlingGame.UnitTests.cpp
