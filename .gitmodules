@@ -1,3 +1,9 @@
 [submodule "Sources/Tests/3rdParty/Catch"]
 	path = Sources/Tests/3rdParty/Catch
 	url = git@github.com:philsquared/Catch.git
+[submodule "Sources/Modules/3rdParty/variant"]
+	path = Sources/Modules/3rdParty/variant
+	url = git@github.com:tcbrindle/variant.git
+[submodule "Sources/Modules/3rdParty/optional"]
+	path = Sources/Modules/3rdParty/optional
+	url = git@github.com:akrzemi1/Optional.git
