@@ -1,3 +1,6 @@
 [submodule "Sources/Tests/3rdParty/Catch"]
 	path = Sources/Tests/3rdParty/Catch
 	url = git@github.com:philsquared/Catch.git
+[submodule "Sources/Modules/3rdParty/cpp17_headers"]
+	path = Sources/Modules/3rdParty/cpp17_headers
+	url = git@github.com:tcbrindle/cpp17_headers.git
