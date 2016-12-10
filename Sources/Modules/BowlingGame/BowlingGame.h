@@ -2,26 +2,40 @@
 #define BOWLING_GAME_H
 
 #include <vector>
+#include <array>
+
+#include "3rdParty/variant/variant"
 #include "Helpers/UserDefinedTypes.h"
 
-using Roll = u32;
-using Rolls = std::vector<Roll>;
+namespace xstd = std::experimental;
 
 /// BowlingGame class contains all information about 1 game (10 frames) of bowling
 class BowlingGame
 {
 public:
-    u32 CalculateScore(const Rolls& rolls) const;
+    u32 CalculateScore(const std::vector<u32>& rolls) const;
 
 private:
-    u32 CalculateRemainingScore(const Rolls::const_iterator& currRoll,
-                                const Rolls::const_iterator& endOfRolls,
-                                u32 frameNo) const;
-    u32 RollsThisFrame(const Rolls::const_iterator& currRoll) const;
+    struct Frame
+    {
+        struct OpenFrame { std::array<u32, 2> rolls; };
+        struct ClosedFrame {};
+        struct StrikeFrame : public ClosedFrame { std::array<u32, 1> rolls; };
+        struct SpareFrame : public ClosedFrame { std::array<u32, 2> rolls; };
+        struct StrikeFinalFrame : public ClosedFrame { std::array<u32, 3> rolls; };
+        struct SpareFinalFrame: public ClosedFrame { std::array<u32, 3> rolls; };
 
-    bool IsStrikeFrame(const Rolls::const_iterator& currRoll) const;
-    bool IsSpareFrame(const Rolls::const_iterator& currRoll) const;
-    bool IsClosedFrame(const Rolls::const_iterator& currRoll) const;
+        xstd::variant<OpenFrame, StrikeFrame, SpareFrame, StrikeFinalFrame, SpareFinalFrame> frame_t;
+    };
+
+    u32 CalculateRemainingScore(const std::vector<u32>::const_iterator& currRoll,
+                                const std::vector<u32>::const_iterator& endOfRolls,
+                                u32 frameNo) const;
+    u32 RollsThisFrame(const std::vector<u32>::const_iterator& currRoll) const;
+
+    bool IsStrikeFrame(const std::vector<u32>::const_iterator& currRoll) const;
+    bool IsSpareFrame(const std::vector<u32>::const_iterator& currRoll) const;
+    bool IsClosedFrame(const std::vector<u32>::const_iterator& currRoll) const;
 
 };
 
