@@ -2,6 +2,7 @@
 #define USER_DEFINED_TYPES_H
 
 #include <cstdint>
+#include <cstddef>
 
 //Rust-style abbreviated types
 using i8 = int8_t;
