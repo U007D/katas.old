@@ -2,7 +2,6 @@
 #define USER_DEFINED_TYPES_H
 
 #include <cstdint>
-#include <cstddef>
 
 //Rust-style abbreviated types
 using i8 = int8_t;
@@ -16,6 +15,16 @@ using u16 = uint16_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 using usz = size_t;
+
+using i8f = int_fast8_t;
+using i16f = int_fast16_t;
+using i32f = int_fast32_t;
+using i64f = int_fast64_t;
+
+using u8f = uint_fast8_t;
+using u16f = uint_fast16_t;
+using u32f = uint_fast32_t;
+using u64f = uint_fast64_t;
 
 using f32 = float;
 using f64 = double;
