@@ -4,11 +4,6 @@
 #include <vector>
 #include "Helpers/UserDefinedTypes.h"
 
-struct BowlingConstants
-{
-    static constexpr u8 MAX_ROLLS_PER_GAME = 21;
-};
-
 using Rolls = std::vector<u8>;
 
 /// BowlingGame class contains all information about 1 game (10 frames) of bowling
@@ -21,8 +16,6 @@ public:
     BowlingGame Roll(const Rolls& rolls) noexcept;
 private:
     u16 ScoreRollsByFrame(const Rolls&& rolls, const u8 frame = 1) const;
-    u8 RollsContributingToScore(const Rolls& rolls) const;
-    u8 RollsInFrame(const Rolls& rolls) const;
 
     Rolls rolls_;
 };

@@ -3,9 +3,20 @@
 #include "range/v3/all.hpp"
 #include "BowlingGame.h"
 
+struct Consts
+{
+    static constexpr u8 MAX_ROLLS_PER_GAME = 21;
+    static constexpr u8 FRAMES_PER_GAME = 10;
+    static constexpr u8 ROLLS_IN_STRIKE_FRAME = 1;
+    static constexpr u8 ROLLS_IN_NORMAL_FRAME = 2;
+    static constexpr u8 ROLLS_IN_CLOSED_FRAME_SCORE = 3;
+    static constexpr u8 ROLLS_IN_OPEN_FRAME_SCORE = 2;
+    static constexpr u8 PINS_IN_CLOSED_FRAME = 10;
+};
+
 BowlingGame::BowlingGame()
 {
-    rolls_.reserve(BowlingConstants::MAX_ROLLS_PER_GAME);
+    rolls_.reserve(Consts::MAX_ROLLS_PER_GAME);
 }
 
 BowlingGame BowlingGame::Roll(const Rolls& rolls) noexcept
@@ -20,24 +31,18 @@ u16 BowlingGame::Score() const
     return ScoreRollsByFrame(Rolls(rolls_));
 }
 
-u8 BowlingGame::RollsContributingToScore(const Rolls& rolls) const
-{
-    return ranges::accumulate(rolls
-               | ranges::view::take(2), 0) >= 10 ? 3 : 2;
-}
-
-u8 BowlingGame::RollsInFrame(const Rolls& rolls) const
-{
-    return ranges::accumulate(rolls
-                              | ranges::view::take(1), 0) == 10 ? 1 : 2;
-}
-
 u16 BowlingGame::ScoreRollsByFrame(const Rolls&& rolls, const u8 frame) const
 {
-    if(ranges::empty(rolls) || frame > 10) { return 0; }
+    if (ranges::empty(rolls) || frame > Consts::FRAMES_PER_GAME) { return 0; }
 
     return static_cast<u16>(ranges::accumulate(rolls
-                                | ranges::view::take_exactly(RollsContributingToScore(rolls)), 0)
-                            + ScoreRollsByFrame(rolls
-                                | ranges::view::drop(RollsInFrame(rolls)), frame + 1));
+           | ranges::view::take_exactly(ranges::accumulate(rolls
+                    | ranges::view::take(Consts::ROLLS_IN_NORMAL_FRAME), 0) >= Consts::PINS_IN_CLOSED_FRAME
+                                        ? Consts::ROLLS_IN_CLOSED_FRAME_SCORE
+                                        : Consts::ROLLS_IN_OPEN_FRAME_SCORE), 0)
+                + ScoreRollsByFrame(rolls
+                    | ranges::view::drop(ranges::accumulate(rolls
+                        | ranges::view::take(Consts::ROLLS_IN_STRIKE_FRAME), 0) == Consts::PINS_IN_CLOSED_FRAME
+                                        ? Consts::ROLLS_IN_STRIKE_FRAME
+                                        : Consts::ROLLS_IN_NORMAL_FRAME), frame + 1));
 }
