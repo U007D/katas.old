@@ -35,5 +35,15 @@ SCENARIO("BowlingGame unit tests")
                 REQUIRE(score == 16);
             }
         }
+
+        WHEN("a strike, a 3-roll, a 4-roll followed by gutterballs is rolled")
+        {
+            auto score = Score({10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+
+            THEN("the score should be 24")
+            {
+                REQUIRE(score == 24);
+            }
+        }
     }
 }
