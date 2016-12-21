@@ -33,16 +33,16 @@ u16 BowlingGame::Score() const
 
 u16 BowlingGame::ScoreRollsByFrame(const Rolls&& rolls, const u8 frame) const
 {
-    if (ranges::empty(rolls) || frame > Consts::FRAMES_PER_GAME) { return 0; }
-
-    return static_cast<u16>(ranges::accumulate(rolls
+    return ranges::empty(rolls) || frame > Consts::FRAMES_PER_GAME
+        ? 0
+        : static_cast<u16>(ranges::accumulate(rolls
            | ranges::view::take_exactly(ranges::accumulate(rolls
-                    | ranges::view::take(Consts::ROLLS_IN_NORMAL_FRAME), 0) >= Consts::PINS_IN_CLOSED_FRAME
+                | ranges::view::take(Consts::ROLLS_IN_NORMAL_FRAME), 0) >= Consts::PINS_IN_CLOSED_FRAME
                                         ? Consts::ROLLS_IN_CLOSED_FRAME_SCORE
                                         : Consts::ROLLS_IN_OPEN_FRAME_SCORE), 0)
-                + ScoreRollsByFrame(rolls
-                    | ranges::view::drop(ranges::accumulate(rolls
-                        | ranges::view::take(Consts::ROLLS_IN_STRIKE_FRAME), 0) == Consts::PINS_IN_CLOSED_FRAME
+        + ScoreRollsByFrame(rolls
+                | ranges::view::drop(ranges::accumulate(rolls
+                    | ranges::view::take(Consts::ROLLS_IN_STRIKE_FRAME), 0) == Consts::PINS_IN_CLOSED_FRAME
                                         ? Consts::ROLLS_IN_STRIKE_FRAME
                                         : Consts::ROLLS_IN_NORMAL_FRAME), frame + 1));
 }
