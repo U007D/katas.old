@@ -45,5 +45,15 @@ SCENARIO("BowlingGame unit tests")
                 REQUIRE(score == 24);
             }
         }
+
+        WHEN("a perfect game is rolled")
+        {
+            auto score = Score({10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10});
+
+            THEN("the score should be 300")
+            {
+                REQUIRE(score == 300);
+            }
+        }
     }
 }
