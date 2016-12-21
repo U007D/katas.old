@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED)
 #set(CMAKE_CXX_STANDARD 14  )
 set(CXX_STANDARD "c++1z")
 
-set(CLANG_CXX_WALL "-Weverything -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-newline-eof -Wno-exit-time-destructors -Wno-weak-vtables -Wno-documentation-unknown-command -Wno-undef")
+set(CLANG_CXX_WALL "-Weverything -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-newline-eof -Wno-exit-time-destructors -Wno-weak-vtables")
 set(CLANG_CXX_FLAGS "-std=${CXX_STANDARD} ${CLANG_CXX_WALL}")
 
 set(GCC_CXX_WALL "-Wall -Wpedantic -Werror")
