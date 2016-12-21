@@ -15,5 +15,15 @@ SCENARIO("BowlingGame unit tests")
                 REQUIRE(score == 0);
             }
         }
+
+        WHEN("all one-balls are rolled")
+        {
+            auto score = Score({1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+
+            THEN("the score should be 20")
+            {
+                REQUIRE(score == 20);
+            }
+        }
     }
 }
