@@ -38,3 +38,9 @@ fn strike_followed_by_3_then_4_rest_gutterball_game() {
     let result = game_score(&vec![10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     assert!(result == 24);
 }
+
+#[test]
+fn perfect_game() {
+    let result = game_score(&vec![10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]);
+    assert!(result == 300);
+}
