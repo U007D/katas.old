@@ -9,9 +9,9 @@ fn frame_score(rolls: &[u8], frame: u8) -> u16 {
     }
     else {
         rolls.iter()
-            .take(if rolls[0] + rolls[1] == 10 { 3 } else { 2 })
+            .take(if rolls[0] + rolls[1] >= 10 { 3 } else { 2 })
             .fold(0u16, | sum, el | sum + *el as u16)
-        + frame_score(&rolls[2..], frame + 1)
+        + frame_score(&rolls[if rolls[0] == 10 { 1 } else { 2 }..], frame + 1)
     }
 }
 
@@ -31,4 +31,10 @@ fn one_ball_game() {
 fn spare_followed_by_3_rest_gutterball_game() {
     let result = game_score(&vec![5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     assert!(result == 16);
+}
+
+#[test]
+fn strike_followed_by_3_then_4_rest_gutterball_game() {
+    let result = game_score(&vec![10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    assert!(result == 24);
 }
