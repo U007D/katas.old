@@ -1,9 +1,9 @@
 
-fn hello() -> String {
-    format!("Hello, {}-bit world!", std::usize::MAX)
+pub fn score(rolls: &[u8]) -> u16 {
+    return 0;
 }
 
 #[test]
-fn hello_result() {
-    assert!(hello().is_empty() == false);
+fn all_gutterballs_yield_zero() {
+    assert!(score(&[20; 0]) == 0);
 }
