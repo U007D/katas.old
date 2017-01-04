@@ -12,7 +12,7 @@ fn score_frames(rolls: &[u8], frame: u8) -> u16 {
                         .sum::<u8>() >= 10 { 3 } else { 2 })
                 .sum::<u8>() as u16
             +
-                score_frames(&rolls[std::cmp::min(if rolls[0] == 10 { 1 } else { 2 }, rolls.len())..], frame + 1)
+                score_frames(&rolls[if rolls[0] == 10 { 1 } else { 2 }..], frame + 1)
     }
 }
 
