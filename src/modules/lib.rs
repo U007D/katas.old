@@ -35,3 +35,8 @@ fn spare_then_3_followed_by_gutterballs_yields_16() {
 fn strike_then_3_then_4_followed_by_gutterballs_yields_24() {
     assert!(score_game(&[10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) == 24);
 }
+
+#[test]
+fn all_strikes_yields_300() {
+    assert!(score_game(&[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]) == 300);
+}
