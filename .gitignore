@@ -1,0 +1,13 @@
+## Doc
+Bowling Game Kata.ppt
+
+## Misc OS crap
+**/.DS_Store
+.vscode
+
+## Node
+**/node_modules
+npm-debug.log
+
+## Rust
+**/target
