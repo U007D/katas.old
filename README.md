@@ -1,6 +1,6 @@
 # BowlingGameKata
 
-My simultaneous exploration of BDD (behavioral-driven development) and functional programming in C++ through the use of the Bowling Game Kata.
+My simultaneous exploration of BDD (behavioral-driven development) and functional programming in C++ through the use of the [Bowling Game Kata](http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata).
 
 If you are practicing, these are probably the parts you want to see:
 
