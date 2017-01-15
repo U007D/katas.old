@@ -11,4 +11,4 @@ https://github.com/bradleygibson/katas/blob/brad/bowling/c%2B%2B-017/Sources/Mod
 https://github.com/bradleygibson/katas/blob/brad/bowling/c%2B%2B-017/Sources/Tests/Unit/BowlingGame.UnitTests.cpp
 
 **Micro-commit log:**  
-https://github.com/bradleygibson/katas/commits/kata-017
+https://github.com/bradleygibson/katas/commits/brad/bowling/c%2B%2B-017
