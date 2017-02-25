@@ -2,17 +2,14 @@ pub fn score_game(rolls: &[u8]) -> u16 {
     score_frames(rolls, 1)
 }
 
-fn score_frames(rolls: &[u8], frame: u8) -> u16 {
-    if frame > 10 {
-        0
-    } else {
-        rolls.iter()
-                .take(if rolls.iter()
-                        .take(2)
-                        .sum::<u8>() >= 10 { 3 } else { 2 })
-                .sum::<u8>() as u16
-            +
-                score_frames(&rolls[if rolls[0] == 10 { 1 } else { 2 }..], frame + 1)
+fn frame_score(rolls: &[u8], frame: u8) -> u16 {
+
+    match frame > 10 || rolls.is_empty() {
+        true => 0,
+        false => rolls.iter()
+                      .take(match rolls[0] + rolls[1] >= 10 { true => 3, false => 2 })
+                      .fold(0u16, | sum, &el | sum + el as u16)
+            + frame_score(&rolls[match rolls[0] == 10 { true => 1, false => 2 }..], frame + 1)
     }
 }
 
